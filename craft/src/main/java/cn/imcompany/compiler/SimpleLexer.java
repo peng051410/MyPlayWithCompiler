@@ -113,7 +113,7 @@ public class SimpleLexer {
      * @param code
      * @return
      */
-    SimpleTokenReader tokenize(String code) {
+    public SimpleTokenReader tokenize(String code) {
         tokens = new ArrayList<>();
         tokenText = new StringBuffer();
         token = new SimpleToken();

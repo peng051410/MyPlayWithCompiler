@@ -14,37 +14,6 @@ import java.util.List;
  */
 public class SimpleCalculator {
 
-    public static void main(String[] args) {
-
-        SimpleCalculator calculator = new SimpleCalculator();
-
-        //测试变量声明语句的解析
-        String script = "int a = b+3;";
-        System.out.println("解析变量声明语句: " + script);
-        SimpleLexer lexer = new SimpleLexer();
-        TokenReader tokens = lexer.tokenize(script);
-        try {
-            SimpleASTNode node = calculator.intDeclare(tokens);
-            calculator.dumpAST(node, "");
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-
-        //测试表达式
-        script = "2+3*5";
-        System.out.println("\n计算: " + script + "，看上去一切正常。");
-        calculator.evaluate(script);
-
-        //测试语法错误
-        script = "2+";
-        System.out.println("\n: " + script + "，应该有语法错误。");
-        calculator.evaluate(script);
-
-        script = "2+3+4";
-        System.out.println("\n计算: " + script + "，结合性出现错误。");
-        calculator.evaluate(script);
-    }
-
     /**
      * 执行脚本，并打印输出AST和求值过程。
      *
@@ -65,8 +34,8 @@ public class SimpleCalculator {
     /**
      * 解析脚本，并返回根节点
      *
-     * @param code
-     * @return
+     * @param code 源码
+     * @return 根节点
      * @throws Exception
      */
     public ASTNode parse(String code) throws Exception {
@@ -81,9 +50,9 @@ public class SimpleCalculator {
     /**
      * 对某个AST节点求值，并打印求值过程。
      *
-     * @param node
+     * @param node  AST节点
      * @param indent 打印输出时的缩进量，用tab控制
-     * @return
+     * @return 计算结果
      */
     private int evaluate(ASTNode node, String indent) {
         int result = 0;
@@ -95,7 +64,8 @@ public class SimpleCalculator {
                 }
                 break;
             case Additive:
-                ASTNode child1 = node.getChildren().get(0);
+                ASTNode child1;
+                child1 = node.getChildren().get(0);
                 int value1 = evaluate(child1, indent + "\t");
                 ASTNode child2 = node.getChildren().get(1);
                 int value2 = evaluate(child2, indent + "\t");
@@ -117,7 +87,7 @@ public class SimpleCalculator {
                 }
                 break;
             case IntLiteral:
-                result = Integer.valueOf(node.getText()).intValue();
+                result = Integer.parseInt(node.getText());
                 break;
             default:
         }
@@ -128,7 +98,7 @@ public class SimpleCalculator {
     /**
      * 语法解析：根节点
      *
-     * @return
+     * @return 根节点
      * @throws Exception
      */
     private SimpleASTNode prog(TokenReader tokens) throws Exception {
@@ -147,10 +117,11 @@ public class SimpleCalculator {
      * int a;
      * int b = 2*3;
      *
-     * @return
+     * @return 节点
      * @throws Exception
      */
-    private SimpleASTNode intDeclare(TokenReader tokens) throws Exception {
+    public SimpleASTNode intDeclare(TokenReader tokens) throws Exception {
+
         SimpleASTNode node = null;
         Token token = tokens.peek();    //预读
         if (token != null && token.getType() == TokenType.Int) {   //匹配Int
@@ -173,13 +144,11 @@ public class SimpleCalculator {
                 throw new Exception("variable name expected");
             }
 
-            if (node != null) {
-                token = tokens.peek();
-                if (token != null && token.getType() == TokenType.SemiColon) {
-                    tokens.read();
-                } else {
-                    throw new Exception("invalid statement, expecting semicolon");
-                }
+            token = tokens.peek();
+            if (token != null && token.getType() == TokenType.SemiColon) {
+                tokens.read();
+            } else {
+                throw new Exception("invalid statement, expecting semicolon");
             }
         }
         return node;
@@ -281,14 +250,19 @@ public class SimpleCalculator {
      * 一个简单的AST节点的实现。
      * 属性包括：类型、文本值、父节点、子节点。
      */
-    private class SimpleASTNode implements ASTNode {
+    public class SimpleASTNode implements ASTNode {
 
         SimpleASTNode parent = null;
         List<ASTNode> children = new ArrayList<>();
         List<ASTNode> readonlyChildren = Collections.unmodifiableList(children);
+        /**
+         * 节点类型
+         */
         ASTNodeType nodeType;
+        /**
+         * 节点文本
+         */
         String text;
-
 
         public SimpleASTNode(ASTNodeType nodeType, String text) {
             this.nodeType = nodeType;
@@ -328,7 +302,7 @@ public class SimpleCalculator {
      * @param node
      * @param indent 缩进字符，由tab组成，每一级多一个tab
      */
-    private void dumpAST(ASTNode node, String indent) {
+    public void dumpAST(ASTNode node, String indent) {
         System.out.println(indent + node.getType() + " " + node.getText());
         for (ASTNode child : node.getChildren()) {
             dumpAST(child, indent + "\t");
