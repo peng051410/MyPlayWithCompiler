@@ -28,8 +28,17 @@ public enum TokenType{
 
     Int,
 
+    /**
+     * 标识符
+     */
     Identifier,     //标识符
 
+    /**
+     * 整型字面量
+     */
     IntLiteral,     //整型字面量
+    /**
+     * 字符串字面量
+     */
     StringLiteral   //字符串字面量
 }
