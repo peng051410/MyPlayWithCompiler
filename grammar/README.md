@@ -1,14 +1,15 @@
 # Antlr
+## Hello
 `sh
 antlr Hello.g4
 `
 
-# Compile
+## Compile
 `sh
 javac -classpath ../lib/*.jar *.java
 `
 
-# Generate file
+## Generate file
 `sh
 grun Hello tokens -tokens hello.py
 `
@@ -22,6 +23,24 @@ grun Hello tokens -tokens hello.py
 4. Id 是其 Token 类别
 5. 1:4 表示这个 Token 在源代码中位于第 1 行、第 4 列
 
-# Chinese
-## Result
+## Chinese
+### Result
 [@5,14:15='如果',<If>,2:0]
+
+## PlayScript
+`sh
+antlr -visitor PlayScript.g4
+`
+
+## Compile
+`sh
+javac -classpath ../lib/*.jar *.java
+`
+
+## Test Parser
+`sh
+cd ../
+grun antlrtest.PlayScript expression -gui
+`
+
+end expression and press Ctrl+D

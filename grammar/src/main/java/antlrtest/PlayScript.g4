@@ -1,10 +1,9 @@
 grammar PlayScript;
 
-import CommonLexer;
+import CommonLexer;   //导入词法定义
 
-/*下面的内容加到所生成的Java源文件的头部，如包名称，import语句等。*/
 @header {
-package grammars;
+package antlrtest;
 }
 
 literal
