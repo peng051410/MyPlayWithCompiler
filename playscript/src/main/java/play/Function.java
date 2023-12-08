@@ -17,6 +17,9 @@ public class Function extends Scope implements FunctionType {
     //闭包变量，即它所引用的外部环境变量
     protected Set<Variable> closureVariables = null;
 
+    /**
+     * 参数类型列表
+     */
     private List<Type> paramTypes = null;
 
     protected Function(String name, Scope enclosingScope, ParserRuleContext ctx) {
@@ -33,7 +36,7 @@ public class Function extends Scope implements FunctionType {
     @Override
     public List<Type> getParamTypes() {
         if (paramTypes == null) {
-            paramTypes = new LinkedList<Type>();
+            paramTypes = new LinkedList<>();
         }
 
         for (Variable param : parameters) {

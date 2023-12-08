@@ -170,7 +170,7 @@ blockStatement
     ;
 
 statement
-    : blockLabel=block
+    : blockLabel=block // blockLabel is alias to block for convenient program
     // | ASSERT expression (':' expression)? ';'
     | IF parExpression statement (ELSE statement)?
     | FOR '(' forControl ')' statement
@@ -234,8 +234,8 @@ functionCall
 expression
     : primary
     | expression bop='.'
-      ( IDENTIFIER
-      | functionCall
+      ( IDENTIFIER  //对象属性
+      | functionCall //对象方法
       | THIS
     //   | NEW nonWildcardTypeArguments? innerCreator
     //   | SUPER superSuffix

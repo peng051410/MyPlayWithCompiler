@@ -44,3 +44,14 @@ grun antlrtest.PlayScript expression -gui
 `
 
 end expression and press Ctrl+D
+
+# Grun
+## grun Hello r -tokens
+Print out the token stream
+
+## grun Hello r -tree
+Print the parse tree in LISP form
+
+## grun Hello r -gui
+Display the parse tree in a dialog box
+

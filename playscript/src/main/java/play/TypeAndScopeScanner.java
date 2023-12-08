@@ -17,7 +17,7 @@ public class TypeAndScopeScanner extends PlayScriptBaseListener {
 
     private AnnotatedTree at = null;
 
-    private final Stack<Scope> scopeStack = new Stack<Scope>();
+    private final Stack<Scope> scopeStack = new Stack<>();
 
     public TypeAndScopeScanner(AnnotatedTree at) {
         this.at = at;

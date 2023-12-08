@@ -48,12 +48,12 @@ public class AsmGen extends PlayScriptBaseVisitor<String> {
     // 计算过程中的临时变量存放的位置，
     // key: AST的节点
     // value: 该节点存储的地址，可以是寄存器或栈
-    private final Map<ParserRuleContext, String> tempVars = new HashMap<ParserRuleContext, String>();
+    private final Map<ParserRuleContext, String> tempVars = new HashMap<>();
 
     // 本地变量存储的地址。目前只在栈中分配，不优化到寄存器中
     // key: 变量
     // value: 该节点存储的地址，在栈中
-    private final Map<Variable, String> localVars = new HashMap<Variable, String>();
+    private final Map<Variable, String> localVars = new HashMap<>();
 
     // 可以使用的寄存器
     //private String[] registersq = { "%rax", "%rbx", "%r10", "%r11", "%r12", "%r13", "%r14", "%r15" };
@@ -65,7 +65,7 @@ public class AsmGen extends PlayScriptBaseVisitor<String> {
     private StringBuffer bodyAsm = new StringBuffer();
 
     // 字符串字面量
-    private final List<String> stringLiterals = new LinkedList<String>();
+    private final List<String> stringLiterals = new LinkedList<>();
 
     ///////////////////////////////////////
     // 主控程序
@@ -402,7 +402,7 @@ public class AsmGen extends PlayScriptBaseVisitor<String> {
 
             // 1. 先计算所有参数的值，这个时候可能会引起栈的变化，用来存放临时变量
             int oldOffset = rspOffset;
-            List<String> values = new LinkedList<String>();
+            List<String> values = new LinkedList<>();
             for (int i = 0; i < numParams; i++) {
                 values.add(visitExpression(ctx.expressionList().expression(i)));
             }

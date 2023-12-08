@@ -319,7 +319,7 @@ public class RefResolver extends PlayScriptBaseListener {
      * @return
      */
     private List<Type> getParamTypes(FunctionCallContext ctx) {
-        List<Type> paramTypes = new LinkedList<Type>();
+        List<Type> paramTypes = new LinkedList<>();
         if (ctx.expressionList() != null) {
             for (ExpressionContext exp : ctx.expressionList().expression()) {
                 Type type = at.typeOfNode.get(exp);

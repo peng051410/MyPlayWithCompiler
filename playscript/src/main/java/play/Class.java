@@ -10,7 +10,7 @@ public class Class extends Scope implements Type {
     private Class parentClass = null; //= rootClass;
 
     //这个类的This变量
-    private This thisRef = null;
+    private final This thisRef;
 
     private Super superRef = null;
 

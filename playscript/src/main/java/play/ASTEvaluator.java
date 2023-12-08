@@ -140,7 +140,7 @@ public class ASTEvaluator extends PlayScriptBaseVisitor<Object> {
     }
 
     public LValue getLValue(Variable variable) {
-        StackFrame f = stack.peek();
+        StackFrame f = stack.peek(); //获取栈顶的栈桢
 
         PlayObject valueContainer = null;
         while (f != null) {
@@ -1145,6 +1145,7 @@ public class ASTEvaluator extends PlayScriptBaseVisitor<Object> {
      * @return
      */
     private List<Object> calcParamValues(FunctionCallContext ctx) {
+        // 计算实参的值
         List<Object> paramValues = new LinkedList<>();
         if (ctx.expressionList() != null) {
             for (ExpressionContext exp : ctx.expressionList().expression()) {

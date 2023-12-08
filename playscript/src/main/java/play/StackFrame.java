@@ -1,9 +1,12 @@
 package play;
 
+/**
+ * 栈帧
+ */
 public class StackFrame {
 
     //该frame所对应的scope
-    Scope scope = null;
+    Scope scope;
 
     /**
      * 放parent scope所对应的frame的指针，就叫parentFrame吧，便于提高查找效率。 规则：如果是同一级函数调用，跟上一级的parentFrame相同；
@@ -12,7 +15,7 @@ public class StackFrame {
     StackFrame parentFrame = null;
 
     //实际存放变量的地方
-    PlayObject object = null;
+    PlayObject object;
 
     /**
      * 本栈桢里有没有包含某个变量的数据

@@ -9,7 +9,7 @@ public class DefaultFunctionType implements FunctionType {
     protected String name = null;
     protected Scope enclosingScope = null;
     protected Type returnType = null;
-    protected List<Type> paramTypes = new LinkedList<Type>();
+    protected List<Type> paramTypes = new LinkedList<>();
 
     //对于未命名的类型，自动赋予名字
     private static int nameIndex = 1;
