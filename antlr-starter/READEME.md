@@ -46,3 +46,9 @@ grun ArrayInit init -tree
 ```shell
 grun ArrayInit init -gui
 ```
+
+## tour
+### Run XML lexer
+```shell
+grun XML tokens -tokens t.xml
+```
