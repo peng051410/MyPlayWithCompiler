@@ -14,6 +14,8 @@
         <module>craft</module>
         <module>grammar</module>
         <module>playscript</module>
+        <module>examples</module>
+        <module>db</module>
     </modules>
 
     <properties>
