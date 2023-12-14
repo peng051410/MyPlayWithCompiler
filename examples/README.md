@@ -35,3 +35,19 @@ grun example.JSON json -tokens
 ```shell
 grun example.JSON json -tree
 ```
+
+# DOT example
+## Generate lexer and parser
+```shell
+antlr DOT.g4 -package example
+```
+
+## Compile
+```shell
+javaca DOT*.java 
+```
+
+ ## GUI
+```shell
+grun example.DOT graph -gui t.dot
+```
