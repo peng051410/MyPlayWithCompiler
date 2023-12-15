@@ -16,6 +16,7 @@
         <module>playscript</module>
         <module>examples</module>
         <module>db</module>
+        <module>listeners</module>
     </modules>
 
     <properties>
