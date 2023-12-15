@@ -51,3 +51,24 @@ javaca DOT*.java
 ```shell
 grun example.DOT graph -gui t.dot
 ```
+
+# Cymbol example
+## Generate lexer and parser
+```shell
+antlr Cymbol.g4 -package example
+```
+
+## Compile
+```shell
+javaca Cymbol*.java 
+```
+
+## Run tokens
+```shell
+grun example.Cymbol file -tokens t.cymbol
+```
+
+## Run tree
+```shell
+grun example.Cymbol file -tree t.cymbol
+```
