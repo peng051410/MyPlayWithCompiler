@@ -72,3 +72,19 @@ grun example.Cymbol file -tokens t.cymbol
 ```shell
 grun example.Cymbol file -tree t.cymbol
 ```
+
+# R example
+## Generate lexer and parser
+```shell
+antlr R.g4 -package example
+```
+
+## Compile
+```shell
+javaca R*.java 
+```
+
+## Run GUI
+```shell
+grun example.R prog -gui t.R
+```
