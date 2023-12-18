@@ -8,3 +8,9 @@ antlr PropertyFile.g4
 ```shell
 antlr -visitor PropertyFile.g4 
 ```
+
+# Listener sample
+## Generate lexer and parser
+```shell
+antlr Expr.g4 
+```
