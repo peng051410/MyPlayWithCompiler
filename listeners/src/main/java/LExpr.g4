@@ -1,5 +1,7 @@
 grammar LExpr;
 
+s : e ;
+
 // labels are used to identify the different alternatives
 e : e MULT e # Mult
   | e ADD e # Add
