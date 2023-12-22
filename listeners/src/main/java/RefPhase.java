@@ -22,32 +22,38 @@ public class RefPhase extends CymbolBaseListener {
 
     @Override
     public void enterFile(CymbolParser.FileContext ctx) {
+        System.out.println("enterFile ref:" + ctx.getText());
         currentScope = globals;
     }
 
     @Override
     public void enterFunctionDecl(CymbolParser.FunctionDeclContext ctx) {
+        System.out.println("enterFunctionDecl ref:" + ctx.getText());
         currentScope = scopes.get(ctx);
     }
 
     @Override
     public void exitFunctionDecl(CymbolParser.FunctionDeclContext ctx) {
+        System.out.println("exitFunctionDecl ref:" + ctx.getText());
         currentScope = currentScope.getEnclosingScope();
     }
 
     @Override
     public void enterBlock(CymbolParser.BlockContext ctx) {
+        System.out.println("enterBlock ref:" + ctx.getText());
         currentScope = scopes.get(ctx);
     }
 
     @Override
     public void exitBlock(CymbolParser.BlockContext ctx) {
+        System.out.println("exitBlock ref:" + ctx.getText());
         currentScope = currentScope.getEnclosingScope();
     }
 
     @Override
     public void exitVar(CymbolParser.VarContext ctx) {
         String name = ctx.ID().getSymbol().getText();
+        System.out.println("exitVar ref:" + name);
         Symbol var = currentScope.resolve(name);
         if (var == null) {
             CheckSymbols.error(ctx.ID().getSymbol(), "no such variable: " + name);
@@ -61,6 +67,7 @@ public class RefPhase extends CymbolBaseListener {
     public void exitCall(CymbolParser.CallContext ctx) {
         // can only handle f(...) not expr(...)
         String funcName = ctx.ID().getText();
+        System.out.println("exitCall ref:" + funcName);
         Symbol meth = currentScope.resolve(funcName);
         if (meth == null) {
             CheckSymbols.error(ctx.ID().getSymbol(), "no such function: " + funcName);
