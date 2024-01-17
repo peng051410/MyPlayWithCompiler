@@ -18,6 +18,8 @@
         <module>db</module>
         <module>listeners</module>
         <module>errors</module>
+        <module>actions</module>
+        <module>report</module>
     </modules>
 
     <properties>
