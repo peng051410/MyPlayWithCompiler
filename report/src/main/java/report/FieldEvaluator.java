@@ -154,6 +154,9 @@ public class FieldEvaluator extends PlayReportBaseVisitor<Object> {
         else if (functionName.equals("runningsum")) {
             rtn = runningSum(ctx);
         }
+        else if (functionName.equals("color60")) {
+            rtn = color60(ctx);
+        }
 
         return rtn;
 
@@ -166,6 +169,45 @@ public class FieldEvaluator extends PlayReportBaseVisitor<Object> {
             rtn = visitExpression(child);
         }
         return rtn;
+    }
+
+    private Object color60(FunctionCallContext ctx) {
+
+        Object rtn = null;
+        String functionFieldName = ctx.getText();
+
+        if (!data.hasField(functionFieldName)) {
+            // 计算参数列
+            String fieldName = ctx.expressionList().expression(0).getText();
+            if (!data.hasField(fieldName)) {
+                addCalculatedField(ctx.expressionList().expression(0));
+            }
+
+            Object rank = null;
+            // 计算rank
+            if (data.getField(fieldName) instanceof List<?>) {
+                List<Object> paramCol = (List<Object>) data.getField(fieldName);
+                List<Object> sorted = paramCol.stream().sorted().collect(Collectors.toList());
+
+                List<Object> rankList = new ArrayList<>(paramCol.size());
+                rank = rankList;
+                int numRows = data.getNumRows();
+                for (Object obj : paramCol) {
+                    int index = sorted.indexOf(obj);
+                    rankList.add(numRows - index);
+                }
+            } else { // 标量
+                rank = 1;
+            }
+
+            // 增加一个字段
+            data.setField(functionFieldName, rank);
+        }
+
+        rtn = data.getField(functionFieldName);
+
+        return rtn;
+
     }
 
     //////////////////////////////////////////////////////////
