@@ -20,6 +20,7 @@
         <module>errors</module>
         <module>actions</module>
         <module>report</module>
+        <module>predicates</module>
     </modules>
 
     <properties>
