@@ -21,6 +21,8 @@
         <module>actions</module>
         <module>report</module>
         <module>predicates</module>
+        <module>lexmagic</module>
+        <module>api</module>
     </modules>
 
     <properties>
