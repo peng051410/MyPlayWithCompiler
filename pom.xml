@@ -23,6 +23,7 @@
         <module>predicates</module>
         <module>lexmagic</module>
         <module>api</module>
+        <module>left-recursion</module>
     </modules>
 
     <properties>
